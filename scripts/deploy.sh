@@ -2,7 +2,6 @@
 BUILD_JAR=$(ls /home/ubuntu/NGINX-learn/build/libs/*.jar)
 JAR_NAME=$(basename $BUILD_JAR)
 DEPLOY_LOG=/home/ubuntu/NGINX-learn/deploy.log
-ERROR_LOG=/home/ubuntu/NGINX-learn/deploy_err.log
 
 echo "> build 파일명: $JAR_NAME" >> $DEPLOY_LOG
 
@@ -24,4 +23,4 @@ fi
 
 DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME
 echo "> DEPLOY_JAR 배포" >> $DEPLOY_LOG
-nohup java -jar $DEPLOY_JAR >> /deploy.log 2> $ERROR_LOG &
+nohup java -jar $DEPLOY_JAR > /deploy.log 2> /error.log &
