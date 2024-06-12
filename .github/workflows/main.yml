@@ -6,6 +6,7 @@ on:
     branches: [ main ] # main branch로 push 될 때 실행됩니다.
 
 env:
+  AWS_REGION: ap-northeast-2
   S3_BUCKET_NAME: nginx-test-s3-bucket
   CODE_DEPLOY_APPLICATION_NAME: nginx-test
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: nginx-test-group
@@ -45,6 +46,14 @@ jobs:
         run: ./gradlew build
         shell: bash
         
+      # AWS 인증
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+          
        # AWS S3에 업로드
       - name: Upload to AWS S3
         run: |
