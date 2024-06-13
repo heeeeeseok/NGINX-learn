@@ -18,7 +18,7 @@ if [ -z $CURRENT_PID ]
 then
   ehco "> 현재 구동중인 서버가 없음" >> $DEPLOY_LOG
 else
-  echo "> kill -15 $CURRENT_PID" >> $DEPLOY_LOG
+  echo "> kill -15 $CURRENT_PID"
   kill -15 $CURRENT_PID
   sleep 5
 fi
